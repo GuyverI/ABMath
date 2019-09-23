@@ -1,5 +1,7 @@
 #include "EulerAngles.h"
 
+#include <cmath>
+
 #include "Float.h"
 
 namespace ABMath

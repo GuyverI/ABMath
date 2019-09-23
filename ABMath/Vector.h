@@ -114,6 +114,41 @@ namespace ABMath
 		return Multiply(vec, T(1) / val);
 	}
 
+	template<class T, size_t SIZE>
+	void Add(Vector<T, SIZE>& outLeft, const Vector<T, SIZE>& right)
+	{
+		for (size_t i = 0; i < SIZE; ++i)
+		{
+			outLeft.At(i) += right.At(i);
+		}
+	}
+
+	template<class T, size_t SIZE>
+	float DotProduct(const Vector<T, SIZE>& left, const Vector<T, SIZE>& right)
+	{
+		float result = 0.f;
+		for (size_t i = 0; i < SIZE; ++i)
+		{
+			result += left.At(i) * right.At(i);
+		}
+		return result;
+	}
+
+	template<class T, size_t SIZE>
+	Vector<T, SIZE> CrossProduct(const Vector<T, SIZE>& left, const Vector<T, SIZE>& right)
+	{
+		auto result = Vector<T, SIZE>::Zero();
+
+		for (size_t i = 0; i < SIZE; ++i)
+		{
+			const size_t index1 = (i + 1) % SIZE;
+			const size_t index2 = (i + 2) % SIZE;
+			result.At(i) = left.At(index1) * right.At(index2) - left.At(index2) * right.At(index1);
+		}
+
+		return result;
+	}
+
 	template<class T>
 	Vector<T, 2> Vector3ToVector2(const Vector<T, 3>& vector3)
 	{
