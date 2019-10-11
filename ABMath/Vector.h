@@ -97,15 +97,27 @@ namespace ABMath
 	}
 
 	template<class T, size_t SIZE>
+	void Multiply(Vector<T, SIZE>& vec, const T& val)
+	{
+		for (size_t i = 0; i < SIZE; ++i)
+		{
+			vec.At(i) *= val;
+		}
+	}
+
+	template<class T, size_t SIZE>
 	Vector<T, SIZE> Multiply(const Vector<T, SIZE>& vec, const T& val)
 	{
 		auto result = vec;
-		for (size_t i = 0; i < SIZE; ++i)
-		{
-			result.At(i) *= val;
-		}
+		Multiply(result, val);
 
 		return result;
+	}
+
+	template<class T, size_t SIZE>
+	void Divide(Vector<T, SIZE>& vec, const T& val)
+	{
+		Multiply(vec, T(1) / val);
 	}
 
 	template<class T, size_t SIZE>
@@ -150,6 +162,12 @@ namespace ABMath
 	}
 
 	template<class T>
+	Vector<T, 3> Vector2ToVector3(const Vector<T, 2>& vector3)
+	{
+		return Vector<T, 3>({ vector3.At(0), vector3.At(1), T(0) });
+	}
+
+	template<class T>
 	Vector<T, 2> Vector3ToVector2(const Vector<T, 3>& vector3)
 	{
 		return Vector<T, 2>({ vector3.At(0), vector3.At(1) });
@@ -166,6 +184,13 @@ namespace ABMath
 		}
 
 		return std::sqrt(length);
+	}
+
+	template<class T, size_t SIZE>
+	void Normalize(Vector<T, SIZE>& vector)
+	{
+		const float length = Length(vector);
+		Divide(vector, T(length));
 	}
 
 	template<class T, size_t SIZE>

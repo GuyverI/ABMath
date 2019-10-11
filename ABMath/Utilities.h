@@ -12,6 +12,30 @@
 namespace ABMath
 {
 	template<class T, size_t SIZE>
+	Angle CalculateAngleBetweenClockwise(const Vector<T, SIZE>& vector1, const Vector<T, SIZE>& vector2)
+	{
+		const auto crossProduct = CrossProduct(vector1, vector2);
+		const float sinOfAngle = Length(crossProduct);
+
+		const float dotProduct = DotProduct(vector1, vector2);
+		
+		const float radians = std::atan2(sinOfAngle, dotProduct);
+
+		return Angle::CreateWithRadians(radians);
+	}
+
+	template<typename T>
+	Angle CalculateAngleBetweenClockwise(const Vector<T, 2>& vector1, const Vector<T, 2>& vector2)
+	{
+		const float crossProduct = vector1.At(0) * vector2.At(1) - vector1.At(1) * vector2.At(0);
+		const float dotProduct = DotProduct(vector1, vector2);
+
+		const float radians = std::atan2(crossProduct, dotProduct);
+
+		return Angle::CreateWithRadians(radians);
+	}
+
+	template<class T, size_t SIZE>
 	Vector<T, SIZE> Multiply(const Vector<T, SIZE>& vec, const Matrix<T, SIZE>& mat)
 	{
 		auto result = Vector<T, SIZE>::Zero();
