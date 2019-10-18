@@ -5,25 +5,13 @@
 #include "AxisAngle.h"
 #include "EulerAngles.h"
 #include "Matrix.h"
+#include "Point.h"
 #include "PolarVector.h"
 #include "Vector.h"
 #include "Quaternion.h"
 
 namespace ABMath
 {
-	template<class T, size_t SIZE>
-	Angle CalculateAngleBetweenClockwise(const Vector<T, SIZE>& vector1, const Vector<T, SIZE>& vector2)
-	{
-		const auto crossProduct = CrossProduct(vector1, vector2);
-		const float sinOfAngle = Length(crossProduct);
-
-		const float dotProduct = DotProduct(vector1, vector2);
-		
-		const float radians = std::atan2(sinOfAngle, dotProduct);
-
-		return Angle::CreateWithRadians(radians);
-	}
-
 	template<typename T>
 	Angle CalculateAngleBetweenClockwise(const Vector<T, 2>& vector1, const Vector<T, 2>& vector2)
 	{
