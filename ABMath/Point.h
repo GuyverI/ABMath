@@ -57,10 +57,7 @@ namespace ABMath
 
 		void Add(const Vector<T, SIZE>& vector)
 		{
-			for (size_t i = 0; i < SIZE; ++i)
-			{
-				_vector.At(i) += vector.At(i);
-			}
+			_vector += vector;
 		}
 
 		Vector<T, SIZE> Subtract(const Point<T, SIZE>& other) const
@@ -94,7 +91,7 @@ namespace ABMath
 	template <class T, size_t SIZE>
 	void operator+=(Point<T, SIZE>& point, const Vector<T, SIZE>& vector)
 	{
-		point.Add(point, vector);
+		point.Add(vector);
 	}
 
 	template <class T, size_t SIZE>

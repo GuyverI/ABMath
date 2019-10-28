@@ -104,6 +104,11 @@ namespace ABMath
 			vec.At(i) *= val;
 		}
 	}
+	template<class T, size_t SIZE>
+	void operator*=(Vector<T, SIZE>& vec, const T& val)
+	{
+		Multiply(vec, val);
+	}
 
 	template<class T, size_t SIZE>
 	Vector<T, SIZE> Multiply(const Vector<T, SIZE>& vec, const T& val)
@@ -113,17 +118,32 @@ namespace ABMath
 
 		return result;
 	}
+	template<class T, size_t SIZE>
+	Vector<T, SIZE> operator*(const Vector<T, SIZE>& vec, const T& val)
+	{
+		return Multiply(vec, val);
+	}
 
 	template<class T, size_t SIZE>
 	void Divide(Vector<T, SIZE>& vec, const T& val)
 	{
 		Multiply(vec, T(1) / val);
 	}
+	template<class T, size_t SIZE>
+	void operator/=(Vector<T, SIZE>& vec, const T& val)
+	{
+		Divide(vec, val);
+	}
 
 	template<class T, size_t SIZE>
 	Vector<T, SIZE> Divide(const Vector<T, SIZE>& vec, const T& val)
 	{
 		return Multiply(vec, T(1) / val);
+	}
+	template<class T, size_t SIZE>
+	Vector<T, SIZE> operator/(const Vector<T, SIZE>& vec, const T& val)
+	{
+		return Divide(vec, val);
 	}
 
 	template<class T, size_t SIZE>
@@ -133,6 +153,59 @@ namespace ABMath
 		{
 			outLeft.At(i) += right.At(i);
 		}
+	}
+	template<class T, size_t SIZE>
+	void operator+=(Vector<T, SIZE>& outLeft, const Vector<T, SIZE>& right)
+	{
+		Add(outLeft, right);
+	}
+
+	template<class T, size_t SIZE>
+	Vector<T, SIZE> Add(const Vector<T, SIZE>& left, const Vector<T, SIZE>& right)
+	{
+		auto result = left;
+		result += right;
+		
+		return result;
+	}
+	template<class T, size_t SIZE>
+	Vector<T, SIZE> operator+(const Vector<T, SIZE>& left, const Vector<T, SIZE>& right)
+	{
+		return Add(left, right);
+	}
+
+	template<class T, size_t SIZE>
+	void Subtract(Vector<T, SIZE>& outLeft, const Vector<T, SIZE>& right)
+	{
+		for (size_t i = 0; i < SIZE; ++i)
+		{
+			outLeft.At(i) -= right.At(i);
+		}
+	}
+	template<class T, size_t SIZE>
+	void operator-=(Vector<T, SIZE>& outLeft, const Vector<T, SIZE>& right)
+	{
+		Subtract(outLeft, right);
+	}
+
+	template<class T, size_t SIZE>
+	Vector<T, SIZE> Subtract(const Vector<T, SIZE>& left, const Vector<T, SIZE>& right)
+	{
+		auto result = left;
+		result -= right;
+
+		return result;
+	}
+	template<class T, size_t SIZE>
+	Vector<T, SIZE> operator-(const Vector<T, SIZE>& left, const Vector<T, SIZE>& right)
+	{
+		return Subtract(left, right);
+	}
+
+	template<class T, size_t SIZE>
+	Vector<T, SIZE> operator-(const Vector<T, SIZE>& vec)
+	{
+		return Vector<T, SIZE>::Zero() - vec;
 	}
 
 	template<class T, size_t SIZE>
