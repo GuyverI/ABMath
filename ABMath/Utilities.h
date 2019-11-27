@@ -102,7 +102,7 @@ namespace ABMath
 		const T y = vector.At(1);
 		
 		const T radius = T(std::hypot(x, y));
-		const float angle = std::atan2f(static_cast<float>(y), static_cast<float>(x));
+		const float angle = std::atan2(static_cast<float>(y), static_cast<float>(x));
 
 		return PolarVector2<T>(radius, ABMath::Angle::CreateWithRadians(angle));
 	}

@@ -252,7 +252,7 @@ namespace ABMath
 				vertAngle -= piOverTwo;
 			}
 
-			if (GetAbsolute(vertAngle) <= 0.0001f)
+			if (GetAbsolute(vertAngle).GetRadians() <= 0.0001f)
 			{
 				horAngle = Angle::CreateWithRadians(0.f);
 			}

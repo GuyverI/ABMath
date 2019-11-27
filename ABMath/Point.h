@@ -15,7 +15,7 @@ namespace ABMath
 
 	public:
 		Point(const T& x, const T& y, const T& z)
-			: _vector(Vector<T, SIZE>::DataType({ x, y, z }))
+			: _vector(typename Vector<T, SIZE>::DataType({ x, y, z }))
 		{
 			static_assert(SIZE > 0);
 		}
@@ -62,7 +62,7 @@ namespace ABMath
 
 		Vector<T, SIZE> Subtract(const Point<T, SIZE>& other) const
 		{
-			auto vecData = Vector<T, SIZE>::DataType(SIZE);
+			auto vecData = typename Vector<T, SIZE>::DataType(SIZE);
 			for (size_t i = 0; i < SIZE; ++i)
 			{
 				vecData[i] = _vector.At(i) - other._vector.At(i);
@@ -70,6 +70,11 @@ namespace ABMath
 
 			return Vector<T, SIZE>(vecData);
 		}
+
+	private:
+		Point()
+			: Point(T(), T())
+		{}
 
 	private:
 		Vector<T, SIZE> _vector;

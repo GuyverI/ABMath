@@ -11,7 +11,6 @@ namespace ABMath
 	class AxisAngle
 	{
 	public:
-		template <class T>
 		AxisAngle(const Vector<T, 3>& axis, const Angle& angle)
 			: _axis(axis)
 			, _angle(angle)

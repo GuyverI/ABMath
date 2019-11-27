@@ -1,5 +1,8 @@
 #pragma once
 
+#include <cmath>
+#include <iomanip>
+#include <optional>
 #include <sstream>
 #include <string>
 #include <vector>
