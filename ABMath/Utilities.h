@@ -184,4 +184,12 @@ namespace ABMath
 
 		return Quaternion(w, x, y, z);
 	}
+
+	template<class T>
+	Vector<T, 2> RotateVector(const Vector<T, 2>& vector, const Angle& angle)
+	{
+		const auto vec3 = Vector2ToVector3(vector);
+		const auto rotMat = CreateRotationX<T, 3>(angle);
+		return Vector3ToVector2(Multiply(vec3, rotMat));
+	}
 }

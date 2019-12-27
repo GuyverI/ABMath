@@ -7,6 +7,7 @@ namespace ABMath
 	public:
 		constexpr static float PI = 3.14159265358979323846f;
 		constexpr static float PI_OVER_TWO = PI / 2.f;
+		constexpr static float TWO_PI = PI * 2.f;
 
 		template<class T>
 		static Angle CreateWithDegrees(const T& deg)
