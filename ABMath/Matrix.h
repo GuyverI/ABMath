@@ -326,6 +326,14 @@ namespace ABMath
 		return matrix;
 	}
 
+	template<class T, size_t SIZE>
+	Matrix<T, SIZE> CreateRotationZ(const Angle& angle)
+	{
+		auto matrix = Matrix<T, SIZE>::Identity();
+		SetRotationZ(matrix, angle);
+		return matrix;
+	}
+
 	template<class T>
 	void SetPerspectiveProjectionX(Matrix<T, 4>& matrix, const T& x)
 	{

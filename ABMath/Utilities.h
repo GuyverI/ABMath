@@ -189,7 +189,8 @@ namespace ABMath
 	Vector<T, 2> RotateVector(const Vector<T, 2>& vector, const Angle& angle)
 	{
 		const auto vec3 = Vector2ToVector3(vector);
-		const auto rotMat = CreateRotationX<T, 3>(angle);
-		return Vector3ToVector2(Multiply(vec3, rotMat));
+		const auto rotMat = CreateRotationZ<T, 3>(angle);
+		const auto resultVec = Multiply(vec3, rotMat);
+		return Vector3ToVector2(resultVec);
 	}
 }
