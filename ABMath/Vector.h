@@ -5,7 +5,10 @@
 #include <optional>
 #include <sstream>
 #include <string>
+#include <type_traits>
 #include <vector>
+
+#include "Float.h"
 
 namespace ABMath
 {
@@ -97,6 +100,34 @@ namespace ABMath
 		fmt << "]";
 
 		return fmt.str();
+	}
+
+	template<class T, size_t SIZE>
+	bool AreEqual(const Vector<T, SIZE>& left, const Vector<T, SIZE>& right)
+	{
+		for (size_t i = 0; i < SIZE; ++i) {
+			if constexpr (std::is_floating_point_v<T>) {
+				if (!AreFloatsEqual(left.At(i), right.At(i))) {
+					return false;
+				}
+			}
+			else {
+				if (left.At(i) != right.At(i)) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+	template<class T, size_t SIZE>
+	bool operator==(const Vector<T, SIZE>& left, const Vector<T, SIZE>& right)
+	{
+		return AreEqual(left, right);
+	}
+	template<class T, size_t SIZE>
+	bool operator!=(const Vector<T, SIZE>& left, const Vector<T, SIZE>& right)
+	{
+		return !AreEqual(left, right);
 	}
 
 	template<class T, size_t SIZE>
